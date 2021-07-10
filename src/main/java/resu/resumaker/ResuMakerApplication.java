@@ -25,10 +25,34 @@ public class ResuMakerApplication {
         payload.setEmail("mohamad@tony.kevin.au.com");
         payload.setPhoneNumber("000-000-0000");
 
-        System.out.println(payload.getName());
-        System.out.println(payload.getJob());
-        System.out.println(payload.getEmail());
-        System.out.println(payload.getPhoneNumber());
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream("sample.pdf"));
+
+        document.open();
+
+        Font title = FontFactory.getFont(FontFactory.HELVETICA, 16, BaseColor.BLACK);
+        Font subtitle = FontFactory.getFont(FontFactory.HELVETICA, 10, BaseColor.BLACK);
+        Font header = FontFactory.getFont(FontFactory.HELVETICA, 14, BaseColor.BLACK);
+        Font paragraph = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
+
+        Chunk name = new Chunk(payload.getName(), title);
+        Chunk contactInfo = new Chunk(payload.getEmail() + " | " + payload.getPhoneNumber(), subtitle);
+        Chunk desiredJob = new Chunk(payload.getJob(), header);
+
+        Paragraph para1 = new Paragraph(name);
+        para1.setAlignment(Paragraph.ALIGN_CENTER);
+        document.add(para1);
+
+        Paragraph para2 = new Paragraph(contactInfo);
+        para2.setAlignment(Paragraph.ALIGN_CENTER);
+        document.add(para2);
+
+        Paragraph para3 = new Paragraph(desiredJob);
+        para3.setAlignment(Paragraph.ALIGN_LEFT);
+        document.add(para3);
+
+        document.close();
+
     }
 
     private static void iTextTest() throws FileNotFoundException, DocumentException {
