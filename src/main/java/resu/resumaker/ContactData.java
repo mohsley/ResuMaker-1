@@ -2,15 +2,15 @@ package resu.resumaker;
 
 import java.util.HashMap;
 
-public class UserData {
+public class ContactData {
     HashMap<String, String> input;
 
-    public UserData(){
+    public ContactData(){
         input = new HashMap<>() {{
             put("name", "N/A");
-            put("job", "N/A");
             put("email", "N/A");
             put("phoneNumber", "N/A");
+            put("customContact", "N/A");
         }};
     }
 
@@ -22,12 +22,6 @@ public class UserData {
             input.remove("name");
         }
         input.put("name", name);
-    }
-    public void setJob(String job) {
-        if(input.get("job").equals("N/A")){
-            input.remove("job");
-        }
-        input.put("job", job);
     }
     public void setEmail(String email) {
         if(input.get("email").equals("N/A")){
@@ -41,12 +35,15 @@ public class UserData {
         }
         input.put("phoneNumber",phoneNumber);
     }
+    public void setCustomContact(String data){
+        if(input.get("customContact").equals("N/A")){
+            input.remove("customContact");
+        }
+        input.put("customContact",data);
+    }
 
     public String getName() {
         return input.get("name");
-    }
-    public String getJob() {
-        return input.get("job");
     }
     public String getEmail() {
         return input.get("email");
@@ -54,4 +51,5 @@ public class UserData {
     public String getPhoneNumber(){
         return input.get("phoneNumber");
     }
+    public String getCustomContact() { return input.get("customContact"); }
 }

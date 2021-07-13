@@ -19,11 +19,10 @@ public class ResuMakerApplication {
 
     public static void main(String[] args) throws IOException, DocumentException, URISyntaxException {
         SpringApplication.run(ResuMakerApplication.class, args);
-        UserData payload = new UserData();
-        payload.setName("Tony Mahamad");
-        payload.setJob("Software Engineer");
-        payload.setEmail("mohamad@tony.kevin.au.com");
-        payload.setPhoneNumber("000-000-0000");
+        ContactData me = new ContactData();
+        me.setName("Tony Mahamad");
+        me.setEmail("mohamad@tony.kevin.au.com");
+        me.setPhoneNumber("000-000-0000");
 
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream("sample.pdf"));
@@ -35,9 +34,9 @@ public class ResuMakerApplication {
         Font header = FontFactory.getFont(FontFactory.HELVETICA, 14, BaseColor.BLACK);
         Font paragraph = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
 
-        Chunk name = new Chunk(payload.getName(), title);
-        Chunk contactInfo = new Chunk(payload.getEmail() + " | " + payload.getPhoneNumber(), subtitle);
-        Chunk desiredJob = new Chunk(payload.getJob(), header);
+        Chunk name = new Chunk(me.getName(), title);
+        Chunk contactInfo = new Chunk(me.getEmail() + " | " + me.getPhoneNumber(), subtitle);
+
 
         Paragraph para1 = new Paragraph(name);
         para1.setAlignment(Paragraph.ALIGN_CENTER);
@@ -47,9 +46,6 @@ public class ResuMakerApplication {
         para2.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(para2);
 
-        Paragraph para3 = new Paragraph(desiredJob);
-        para3.setAlignment(Paragraph.ALIGN_LEFT);
-        document.add(para3);
 
         document.close();
 
