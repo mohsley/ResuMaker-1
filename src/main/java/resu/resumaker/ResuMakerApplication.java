@@ -6,6 +6,8 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import userData.ContactData;
+import userData.EducationData;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

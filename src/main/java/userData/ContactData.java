@@ -1,4 +1,4 @@
-package resu.resumaker;
+package userData;
 
 import java.util.HashMap;
 
