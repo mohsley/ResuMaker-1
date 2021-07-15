@@ -32,3 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 /sample.pdf
+/src/main/resources/blah.jpeg
+/src/main/resources/OIP.jfif
+/pdfBoxHelloWorld.pdf

@@ -14,6 +14,8 @@ public class EducationData {
             put("location", "N/A");
             put("dates", "N/A");
         }};
+        // take a look into appending (string builders)
+        // look into pojo's and how to build them
     }
 
     public HashMap<String, String> getInput() {

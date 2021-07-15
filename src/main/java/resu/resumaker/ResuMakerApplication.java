@@ -20,6 +20,9 @@ import java.util.stream.Stream;
 public class ResuMakerApplication {
 
     public static void main(String[] args) throws IOException, DocumentException, URISyntaxException {
+        // look into checking what the user inputs to see if it's valid (i.e. capitalization) (try/catch and error messages)
+        // look @ spring-web when making UI
+
         SpringApplication.run(ResuMakerApplication.class, args);
         ContactData contact = new ContactData();
         contact.setName("Mohny Tonhamad");
