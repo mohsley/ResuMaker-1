@@ -1,4 +1,4 @@
-package userData;
+package resu.resumaker.userData;
 
 public class CustomData {
     private String title;

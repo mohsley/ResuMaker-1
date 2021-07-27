@@ -1,6 +1,4 @@
-package userData;
-
-import java.util.HashMap;
+package resu.resumaker.userData;
 
 public class EducationData {
     private String school;

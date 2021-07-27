@@ -1,4 +1,4 @@
-package userData;
+package resu.resumaker.userData;
 
 import java.util.ArrayList;
 

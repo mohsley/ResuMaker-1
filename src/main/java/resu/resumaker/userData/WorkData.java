@@ -1,4 +1,4 @@
-package userData;
+package resu.resumaker.userData;
 
 public class WorkData {
     private String title;
