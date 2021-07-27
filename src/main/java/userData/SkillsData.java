@@ -11,4 +11,5 @@ public class SkillsData {
     public void setSkills(String skills){
         this.skills.add(skills);
     }
+    // Java, C++ -->retrivie skills | skills += this.skills; sendback-> to database
 }

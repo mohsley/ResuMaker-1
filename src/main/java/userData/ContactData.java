@@ -3,53 +3,37 @@ package userData;
 import java.util.HashMap;
 
 public class ContactData {
-    HashMap<String, String> input;
+    private String name;
+    private String email;
+    private String phone;
 
-    public ContactData(){
-        input = new HashMap<>() {{
-            put("name", "N/A");
-            put("email", "N/A");
-            put("phoneNumber", "N/A");
-            put("customContact", "N/A");
-        }};
-    }
-
-    public HashMap<String, String> getInput() {
-        return input;
-    }
-    public void setName(String name) {
-        if(input.get("name").equals("N/A")){
-            input.remove("name");
-        }
-        input.put("name", name);
-    }
-    public void setEmail(String email) {
-        if(input.get("email").equals("N/A")){
-            input.remove("email");
-        }
-        input.put("email", email);
-    }
-    public void setPhoneNumber(String phoneNumber){
-        if(input.get("phoneNumber").equals("N/A")){
-            input.remove("phoneNumber");
-        }
-        input.put("phoneNumber",phoneNumber);
-    }
-    public void setCustomContact(String data){
-        if(input.get("customContact").equals("N/A")){
-            input.remove("customContact");
-        }
-        input.put("customContact",data);
+    public ContactData(String name, String email, String phone) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
     }
 
     public String getName() {
-        return input.get("name");
+        return name;
     }
+
+
     public String getEmail() {
-        return input.get("email");
+        return email;
     }
-    public String getPhoneNumber(){
-        return input.get("phoneNumber");
+
+    public String getPhone() {
+        return phone;
     }
-    public String getCustomContact() { return input.get("customContact"); }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
 }
+

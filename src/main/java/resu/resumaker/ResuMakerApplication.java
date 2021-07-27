@@ -12,26 +12,15 @@ import java.net.URISyntaxException;
 
 @SpringBootApplication
 
-public class ResuMakerApplication {
-
-    public static void main(String[] args) throws IOException, DocumentException, URISyntaxException {
+public class ResuMakerApplication{
+    static void samplePdf()  throws IOException, DocumentException, URISyntaxException {
         // look into checking what the user inputs to see if it's valid (i.e. capitalization) (try/catch and error messages)
         // look @ spring-web when making UI
-        SpringApplication.run(ResuMakerApplication.class, args);
-
         // Set contact data
-        ContactData contact = new ContactData();
-        contact.setName("Mohny Tonhamad");
-        contact.setEmail("mohamad@tony.kevin.au.com");
-        contact.setPhoneNumber("000-000-0000");
-
+        ContactData contact = new ContactData("Mohamad Saleh", "msaleh@email.com", "747-542-1421");
         // Set education data
-        EducationData education = new EducationData();
-        education.setSchoolName("University of California, Santa Cruz");
-        education.setDegreeAndMajor("Bachelor of Science: Computer Science");
-        education.setGPA("4.0");
-        education.setLocation("Santa Cruz, CA");
-        education.setDates("2032-09 - 2034-06");
+        EducationData education = new EducationData("University of California, Santa Cruz",
+                "Bachelor of Science: Computer Science", "4.0", "Santa Cruz, CA", "2018-09 - 2022-06");
 
         // Set skill data
         SkillsData skill = new SkillsData();
@@ -41,14 +30,9 @@ public class ResuMakerApplication {
         skill.setSkills("HTML/CSS");
 
         // Set work data
-        WorkData work = new WorkData("Comedian", "Fang Co.", "05/2020 - Present", "Santa Cruz, CA", "Made and created cool jokes at a Fang company.");
+        WorkData work = new WorkData("Software Engineer Intern", "Google", "05/2020 - Present", "San Jose, CA", "Worked on the Google Maps team.");
 
-        // Set custom fields
-        CustomData custom = new CustomData();
-        custom.setTitle("Custom Section");
-        custom.setBody("Lorem ipsum");
-
-        // Create & open document
+        // Set custom field        // Create & open document
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream("sample.pdf"));
         document.open();
@@ -61,14 +45,13 @@ public class ResuMakerApplication {
 
         // Create chunks
         Chunk nameData = new Chunk(contact.getName(), title);
-        Chunk contactData = new Chunk(contact.getEmail() + " | " + contact.getPhoneNumber(), subtitle);
+        Chunk contactData = new Chunk(contact.getEmail() + " | " + contact.getPhone(), subtitle);
         Chunk newLine = new Chunk("\n",paragraph);
         Chunk educationHeader = new Chunk("Education", header);
         Chunk skillsHeader = new Chunk("Skills", header);
         Chunk workHeader = new Chunk("Work Experience", header);
-        Chunk customHeader = new Chunk(custom.getTitle(), header);
-        Chunk educationData = new Chunk( education.getDegreeAndMajor() + " - " + education.getGPA() +
-                " GPA\n" + education.getSchoolName() + " - " + education.getLocation(), paragraph);
+        Chunk educationData = new Chunk( education.getDegree() + " - " + education.getGpa() +
+                " GPA\n" + education.getSchool() + " - " + education.getLocation() +"\nDates Attended: " + education.getDates(), paragraph);
 
         String skillsList = (String) skill.getSkills().get(0);
         if (skill.getSkills().size() > 1) {
@@ -79,7 +62,6 @@ public class ResuMakerApplication {
 
         Chunk skillDataChunk = new Chunk(skillsList, paragraph);
         Chunk workDataChunk = new Chunk(work.getTitle() + " - " + work.getDates() + "\n" + work.getCompany() + " - " + work.getLocation() + "\n" + work.getDescription(), paragraph);
-        Chunk customDataChunk = new Chunk(custom.getBody(), paragraph);
 
         // Create paragraphs
         Paragraph name = new Paragraph(nameData);
@@ -101,9 +83,6 @@ public class ResuMakerApplication {
         Paragraph workHead = new Paragraph(workHeader);
         Paragraph workDataPara = new Paragraph(workDataChunk);
 
-        Paragraph customHead = new Paragraph(customHeader);
-        Paragraph customDataPara = new Paragraph(customDataChunk);
-
         document.add(eduHeader);
         document.add(eduData);
         document.add(spacing);
@@ -113,13 +92,16 @@ public class ResuMakerApplication {
         document.add(workHead);
         document.add(workDataPara);
         document.add(spacing);
-        document.add(customHead);
-        document.add(customDataPara);
         document.add(spacing);
 
 
         document.close();
     }
+    public static void main(String[] args) throws IOException, DocumentException, URISyntaxException {
+        SpringApplication.run(ResuMakerApplication.class, args);
+        samplePdf();
+    }
+
 
 }
 

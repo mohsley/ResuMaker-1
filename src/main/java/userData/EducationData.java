@@ -3,70 +3,57 @@ package userData;
 import java.util.HashMap;
 
 public class EducationData {
-    HashMap<String, String> input;
+    private String school;
+    private String degree;
+    private String gpa;
+    private String location;
+    private String dates;
 
-
-    public EducationData() {
-        input = new HashMap<>() {{
-            put("schoolName", "N/A");
-            put("degreeAndMajor", "N/A");
-            put("GPA", "N/A");
-            put("location", "N/A");
-            put("dates", "N/A");
-        }};
-        // take a look into appending (string builders)
-        // look into pojo's and how to build them
-    }
-
-    public HashMap<String, String> getInput() {
-        return input;
+    public EducationData(String school, String degree, String gpa, String location, String dates) {
+        this.school = school;
+        this.degree = degree;
+        this.gpa = gpa;
+        this.location = location;
+        this.dates = dates;
     }
 
-    public void setSchoolName(String data) {
-        if(input.get("schoolName").equals("N/A")){
-            input.remove("schoolName");
-        }
-        input.put("schoolName", data);
-    }
-    public void setDegreeAndMajor(String data) {
-        if(input.get("degreeAndMajor").equals("N/A")){
-            input.remove("degreeAndMajor");
-        }
-        input.put("degreeAndMajor", data);
-    }
-    public void setGPA(String data) {
-        if(input.get("GPA").equals("N/A")){
-            input.remove("GPA");
-        }
-        input.put("GPA", data);
-    }
-    public void setLocation(String data) {
-        if(input.get("location").equals("N/A")){
-            input.remove("location");
-        }
-        input.put("location", data);
-    }
-    public void setDates(String data) {
-        if(input.get("dates").equals("N/A")){
-            input.remove("dates");
-        }
-        input.put("dates", data);
+    public String getSchool() {
+        return school;
     }
 
-    public String getSchoolName() {
-        return input.get("schoolName");
+    public void setSchool(String school) {
+        this.school = school;
     }
-    public String getDegreeAndMajor() {
-        return input.get("degreeAndMajor");
+
+    public String getDegree() {
+        return degree;
     }
-    public String getGPA() {
-        return input.get("GPA");
+
+    public void setDegree(String degree) {
+        this.degree = degree;
     }
+
+    public String getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(String gpa) {
+        this.gpa = gpa;
+    }
+
     public String getLocation() {
-        return input.get("location");
-    }
-    public String getDates() {
-        return input.get("dates");
+        return location;
     }
 
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getDates() {
+        return dates;
+    }
+
+    public void setDates(String dates) {
+        this.dates = dates;
+    }
 }
