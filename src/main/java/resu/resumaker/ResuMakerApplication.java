@@ -23,7 +23,6 @@ import org.springframework.context.annotation.Bean;
 
 
 @SpringBootApplication
-
 public class ResuMakerApplication{
     static void samplePdf()  throws IOException, DocumentException, URISyntaxException {
         // look into checking what the user inputs to see if it's valid (i.e. capitalization) (try/catch and error messages)
@@ -122,7 +121,7 @@ public class ResuMakerApplication{
     public CommandLineRunner demo(ContactRepository repository) {
         return (args) -> {
             // save a few customers
-            repository.save(new ContactData("Jack Bauer", "jbauer@blahblah.com", "12345678980"));
+//            repository.save(new ContactData("Jack Bauer", "jbauer@blahblah.com", "12345678980"));
 
             // fetch all customers
             log.info("Customers found with findAll():");
