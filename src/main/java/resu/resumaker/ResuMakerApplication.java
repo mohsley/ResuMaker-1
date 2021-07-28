@@ -11,7 +11,7 @@ import resu.resumaker.userData.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
-
+import java.sql.*;
 
 // testing imports
 import org.slf4j.Logger;
@@ -108,31 +108,49 @@ public class ResuMakerApplication{
 
         document.close();
     }
-    public static void main(String[] args) throws IOException, DocumentException, URISyntaxException {
+    static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
+    static final String USER = "program";
+    static final String PASS = "1234";
+    static final String CONTACT_QUERY = "SELECT name, email, phone FROM public.\"Contact\"";
+//    static final String QUERY = "SELECT id, first, last, age FROM Employees";
+
+    public static void main(String[] args) throws IOException, DocumentException, URISyntaxException, SQLException {
         SpringApplication.run(ResuMakerApplication.class, args);
-        //samplePdf();
 
-
-
-    }
-    private static final Logger log = LoggerFactory.getLogger(ResuMakerApplication.class);
-
-    @Bean
-    public CommandLineRunner demo(ContactRepository repository) {
-        return (args) -> {
-            // save a few customers
-//            repository.save(new ContactData("Jack Bauer", "jbauer@blahblah.com", "12345678980"));
-
-            // fetch all customers
-            log.info("Customers found with findAll():");
-            log.info("-------------------------------");
-            for (ContactData contact : repository.findAll()) {
-                log.info(contact.toString());
+        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(CONTACT_QUERY);) {
+            // Extract data from result set
+            while (rs.next()) {
+                // Retrieve by column name
+                System.out.print("Name: " + rs.getString("name"));
+                System.out.print(",Email: " + rs.getString("email"));
+                System.out.println(",Phone: " + rs.getString("phone"));
             }
-            log.info("");
-        };
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-
+//    private static final Logger log = LoggerFactory.getLogger(ResuMakerApplication.class);
+//
+//    @Bean
+//    public CommandLineRunner demo(ContactRepository repository) {
+//        return (args) -> {
+//            // save a few customers
+////            repository.save(new ContactData("Jack Bauer", "jbauer@blahblah.com", "12345678980"));
+//
+//            // fetch all customers
+//            log.info("Customers found with findAll():");
+//            log.info("-------------------------------");
+//            log.info(String.valueOf(repository.findAll()));
+//            for (ContactData contact : repository.findAll()) {
+//                log.info("Do we make it inside?");
+//                log.info(contact.toString());
+//            }
+//            log.info("");
+//        };
+//    }
+//
 
 }
 
