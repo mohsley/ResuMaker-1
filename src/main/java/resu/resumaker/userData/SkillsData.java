@@ -1,15 +1,19 @@
 package resu.resumaker.userData;
 
-import java.util.ArrayList;
-
 public class SkillsData {
-    private ArrayList<String> skills = new ArrayList<>();
+    private String skills;
 
-    public ArrayList getSkills(){
+    public SkillsData(String skills) {
+        this.skills = skills;
+    }
+
+    public String getSkills() {
         return skills;
     }
-    public void setSkills(String skills){
-        this.skills.add(skills);
+
+    public void setSkills(String skills) {
+        this.skills = skills;
     }
-    // Java, C++ -->retrivie skills | skills += this.skills; sendback-> to database
+
+
 }

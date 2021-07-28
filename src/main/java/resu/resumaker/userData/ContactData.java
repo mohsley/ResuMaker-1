@@ -10,7 +10,7 @@ public class ContactData {
     private String phone;
     private Long id;
 
-    protected ContactData() {}
+    public ContactData() {}
 
     public ContactData(String name, String email, String phone) {
         this.name = name;
