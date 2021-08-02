@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import resu.resumaker.services.ContactRepository;
+import resu.resumaker.services.SubmitController;
 import resu.resumaker.userData.*;
 
 import java.io.FileOutputStream;
@@ -35,7 +36,19 @@ public class ResuMakerApplication{
 
     public static void main(String[] args) throws IOException, DocumentException, URISyntaxException, SQLException {
         SpringApplication.run(ResuMakerApplication.class, args);
+        testCall();
         samplePdf();
+    }
+
+    static void testCall() {
+        String [] sampleContact = {"Mohamad Saleh", "mohs@outlook.com", "707-414-2323"};
+        String [] sampleSkills = {"C++", "Git"};
+        String [] sampleWork = {"CodeLabs SWE Intern", "CodeDay", "06/2021 - 08/2021", "Remote", "Made a resume maker"};
+        String [] sampleEducation = {"Univeristy of Santa Cruz", "Bachelor of Science", "4.0", "Santa Cruz, CA", "09/2020 - 06/2022"};
+        SubmitController.contactSubmit(sampleContact);
+        SubmitController.skillSubmit(sampleSkills);
+        SubmitController.workSubmit((sampleWork));
+        SubmitController.educationSubmit(sampleEducation);
     }
 
     static ContactData contactDB() {
