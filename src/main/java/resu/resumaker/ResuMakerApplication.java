@@ -5,7 +5,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import resu.resumaker.services.ContactRepository;
+//import resu.resumaker.services.ContactRepository;
 import resu.resumaker.services.SubmitController;
 import resu.resumaker.userData.*;
 
@@ -36,8 +36,8 @@ public class ResuMakerApplication{
 
     public static void main(String[] args) throws IOException, DocumentException, URISyntaxException, SQLException {
         SpringApplication.run(ResuMakerApplication.class, args);
-        testCall();
-        samplePdf();
+//        testCall();
+//        samplePdf();
     }
 
     static void testCall() {
