@@ -21,16 +21,16 @@
                 <h2>Education</h2>
                 <p><input type="text" placeholder="School Name" required id="school">
                     <input class ="tab"type="text" placeholder="Location" required id="location"></p>
-                    <p><input type="text" placeholder="Email" required id = "email">
-                    <input class ="tab" type="text" placeholder="Phone Number" required id = "phone"></p>
+                    <p><input type="text" placeholder="Degree Type & Major/Concentration" required id = "degree">
+                    <input class ="tab" type="text" placeholder="GPA" required id = "gpa"></p>
                     <p><input type="text" placeholder="Start Date - End Date" id = "timeStudied"></p>
-                    <p><button type="button" class = "addButton" id = "addEduButton">Add Additional Education</button></p>
+                    <p><button type="button" class = "addButton" id = "addEduButton" onclick = "addEdu()">Add Additional Education</button></p>
             </div>
 
             <div class="page">
                 <h2>Skills</h2>
                 <p><input type="text" placeholder="Skill Name" id = "skill">
-                    <button type="submit" class = "addButton" id = "addSkillButton">Add Skill</button></p>
+                    <button type="button" class = "addButton" id = "addSkillButton" onclick="addSkill()">Add Skill</button></p>
             </div>
 
             <div class="page">
@@ -40,7 +40,7 @@
                     <p><input type="text" placeholder="Title" required id = "title">
                     <input class ="tab" type="text" placeholder="Start Date-End Date" required id = "timeWorked"></p>
                     <p><input class = "description" type="text" placeholder = "Description" id = "description"></p>
-                    <p><button type="button" class = "addButton" id = "addWorkButton">Add Additional Experience</button></p>
+                    <p><button type="button" class = "addButton" id = "addWorkButton" onclick="addWork()">Add Additional Experience</button></p>
             </div>
 
             <div style="overflow:auto;">
@@ -58,9 +58,42 @@
             </div>
         </form>
     <script>
+        const skillList = [];
+        const workList = [];
+        const EduList = [];
+
+        function addSkill() {
+            skillList.push(document.getElementById("skill"));
+            document.getElementById("skill").value = null;
+        }
+
+        function addWork() {
+            workList.push([document.getElementById("company"), document.getElementById("location"),
+                            document.getElementById("title"), document.getElementById("timeWorked"),
+                            document.getElementById("description")]);
+            document.getElementById("company").value = null;
+            document.getElementById("location").value = null;
+            document.getElementById("title").value = null;
+            document.getElementById("timeWorked").value = null;
+            document.getElementById("description").value = null;
+        }
+
+        function addEdu() {
+            EduList.push([document.getElementById("school"), document.getElementById("location"),
+                            document.getElementById("degree"), document.getElementById("gpa"),
+                            document.getElementById("timeStudied")]);
+            document.getElementById("school").value = null;
+            document.getElementById("location").value = null;
+            document.getElementById("degree").value = null;
+            document.getElementById("gpa").value = null;
+            document.getElementById("timeStudied").value = null;
+
+        }
+
+
         var currentPage = 0;
         showPage(currentPage);
-        //
+        
         function showPage(n) {
             var x = document.getElementsByClassName("page");
             x[n].style.display = "block";
@@ -85,7 +118,7 @@
             x[currentPage].style.display = "none";
             currentPage = currentPage + n;
             if (currentPage >= x.length) {
-                document.getElementById("regForm").submit();
+                payload();
                 return false;
             }
             showPage(currentPage);
@@ -125,7 +158,16 @@
         // when new skill is pressed, store prevb
         function payload(){
             const contact = [document.getElementById("fname"), document.getElementById("lname"), 
-                             document.getElementById("email"), document.getElementById("tel"),];
+                             document.getElementById("email"), document.getElementById("tel")];
+            if (document.getElementById("skill") != "") {
+                addSkill();
+            }
+            if (document.getElementById("company") != "" || document.getElementById("location") != "" || document.getElementById("title") != "" || document.getElementById("timeWorked") != "" || document.getElementById("description") != "") {
+                addWork();
+            }
+            if (document.getElementById("school") != "" || document.getElementById("location") != "" || document.getElementById("degree") != "" || document.getElementById("gpa") != "" || document.getElementById("timeStudied") != "") {
+                addEdu();
+            }
             
         }
     </script>
