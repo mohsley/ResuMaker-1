@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FormController {
-    @GetMapping("/personal_info")
+    @GetMapping("/form")
     public String form() {
-        return "personal_info";
+        return "form";
     }
 }
