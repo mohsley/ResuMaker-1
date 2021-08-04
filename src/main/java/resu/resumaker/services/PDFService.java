@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import resu.resumaker.services.SubmitController;
 import resu.resumaker.userData.*;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -98,9 +99,8 @@ public class PDFService {
     }
     public PDFService() throws FileNotFoundException, DocumentException {
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("sample.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream("resume.pdf"));
         document.open();
-
     // Setting fonts
     Font title = FontFactory.getFont(FontFactory.HELVETICA, 24, BaseColor.BLACK);
     Font subtitle = FontFactory.getFont(FontFactory.HELVETICA, 14, BaseColor.BLACK);
@@ -183,7 +183,15 @@ public class PDFService {
     }
 
         document.add(miniSpacing);
-
         document.close();
+        // This code does not work, absolute path was used just for dev purposes. Hopefully, we get it to work soon.
+        File file = new File("resume.pdf");
+        if(file.renameTo(new File("C:\\Users\\moh55\\internship\\ResuMaker\\src\\main\\resources\\static"))) {
+            System.out.println("File moved successful");
+            file.delete();
+        }
+        else {
+            file.renameTo(new File(("C:\\Users\\moh55\\internship\\ResuMaker\\src\\main\\resources\\static")));
+        }
     }
 }

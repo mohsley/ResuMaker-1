@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>submit</title>
+        <link th:href = "@{/css/style.css}" rel = "stylesheet" type = "text/css" />
+    </head>
+
+    <body>
+        <div class="box">
+            <h2>Your PDF is ready for use!</h2>
+            <p>Click download to receive your PDF or provide an email address for delivery</p>
+            <p><button type="button" class = "addButton" th:href="@{ResuMaker\resume.pdf}" onclick="openPdf(event, '/resume.pdf');">Download</button></p>
+            <p><input type="text" placeholder="Email" required>
+            <button type="submit" class = "addButton">Send</button></p>
+        </div>
+        <script type="text/javascript">
+            function openPdf(e, path) {
+                // stop the browser from going to the href07
+                e = e || window.event; // for IE
+                e.preventDefault();
+                // launch a new window with your PDF
+                window.open(path, 'resume.pdf');
+            }
+        
+        </script>
+    </body>
+</html>
