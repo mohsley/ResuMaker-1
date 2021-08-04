@@ -63,14 +63,14 @@
         const eduList = [];
 
         function addSkill() {
-            skillList.push(document.getElementById("skill"));
+            skillList.push(document.getElementById("skill").value);
             document.getElementById("skill").value = null;
         }
 
         function addWork() {
-            workList.push([document.getElementById("company"), document.getElementById("location"),
-                            document.getElementById("title"), document.getElementById("timeWorked"),
-                            document.getElementById("description")]);
+            workList.push([document.getElementById("company").value, document.getElementById("workLocation").value,
+                            document.getElementById("title").value, document.getElementById("timeWorked").value,
+                            document.getElementById("description").value]);
             document.getElementById("company").value = null;
             document.getElementById("workLocation").value = null;
             document.getElementById("title").value = null;
@@ -79,9 +79,9 @@
         }
 
         function addEdu() {
-            eduList.push([document.getElementById("school"), document.getElementById("location"),
-                            document.getElementById("degree"), document.getElementById("gpa"),
-                            document.getElementById("timeStudied")]);
+            eduList.push([document.getElementById("school").value, document.getElementById("eduLocation").value,
+                            document.getElementById("degree").value, document.getElementById("gpa").value,
+                            document.getElementById("timeStudied").value]);
             document.getElementById("school").value = null;
             document.getElementById("eduLocation").value = null;
             document.getElementById("degree").value = null;
@@ -157,21 +157,36 @@
         }
         // when new skill is pressed, store prevb
         function payload() {
-            const contact = [document.getElementById("fname"), document.getElementById("lname"), 
-                             document.getElementById("email"), document.getElementById("tel")];
-            if (document.getElementById("skill") != "") {
+            const contact = [document.getElementById("fname").value, document.getElementById("lname").value, 
+                             document.getElementById("email").value, document.getElementById("tel").value];
+            if (document.getElementById("skill").value != "") {
                 addSkill();
             }
-            if (document.getElementById("company") != "" || document.getElementById("location") != "" || document.getElementById("title") != ""
-                || document.getElementById("timeWorked") != "" || document.getElementById("description") != "") {
+            if (document.getElementById("company").value != "" || document.getElementById("workLocation").value != "" || document.getElementById("title").value != ""
+                || document.getElementById("timeWorked").value != "" || document.getElementById("description").value != "") {
                 addWork();
             }
-            if (document.getElementById("school") != "" || document.getElementById("location") != "" || document.getElementById("degree") != ""
-                || document.getElementById("gpa") != "" || document.getElementById("timeStudied") != "") {
+            if (document.getElementById("school").value != "" || document.getElementById("eduLocation").value != "" || document.getElementById("degree").value != ""
+                || document.getElementById("gpa").value != "" || document.getElementById("timeStudied").value != "") {
                 addEdu();
             }
 
-            post("/submit",{contactPOST: contact, educationPOST: eduList, skillPOST: skillList, workPOST: workList});
+            var contact_json = JSON.stringify(contact);
+            var skill_json = JSON.stringify(skillList);
+            var work_json = JSON.stringify(workList);
+            var edu_json = JSON.stringify(eduList);
+
+            console.log(contact);
+            console.log(skillList);
+            console.log(workList);
+            console.log(eduList);
+
+            console.log(contact_json);
+            console.log(skill_json);
+            console.log(work_json);
+            console.log(edu_json);
+
+            post("/submit",{contactPOST: contact_json, educationPOST: edu_json, skillPOST: skill_json, workPOST: work_json});
         }
         function post(path, params, method='post') {
             // The rest of this code assumes you are not using a library.
