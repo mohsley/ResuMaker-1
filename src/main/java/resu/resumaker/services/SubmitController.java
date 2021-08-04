@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.json.*;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.mail.NoSuchProviderException;
+import javax.mail.internet.AddressException;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,7 +27,7 @@ public class SubmitController {
 
     @PostMapping("/submit")
     public String submit(@RequestParam String contactPOST, @RequestParam String educationPOST,
-                       @RequestParam String skillPOST, @RequestParam String workPOST) throws DocumentException, FileNotFoundException, JSONException {
+                       @RequestParam String skillPOST, @RequestParam String workPOST) throws DocumentException, FileNotFoundException, JSONException, AddressException, NoSuchProviderException {
 
         JSONArray contact_json = new JSONArray(contactPOST);
         JSONArray education_json = new JSONArray(educationPOST);

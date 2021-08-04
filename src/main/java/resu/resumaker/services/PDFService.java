@@ -23,6 +23,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import javax.mail.NoSuchProviderException;
+import javax.mail.internet.AddressException;
+
 public class PDFService {
 
     static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
@@ -97,7 +101,7 @@ public class PDFService {
         }
         return query;
     }
-    public PDFService() throws FileNotFoundException, DocumentException {
+    public PDFService() throws FileNotFoundException, DocumentException, AddressException, NoSuchProviderException {
         Document document = new Document();
         String localDir = System.getProperty("user.dir");
         System.out.println(localDir);
@@ -188,6 +192,7 @@ public class PDFService {
 
         document.add(miniSpacing);
         document.close();
+        EmailService email = new EmailService(document);
         // This code does not work, absolute path was used just for dev purposes. Hopefully, we get it to work soon.
 
 
