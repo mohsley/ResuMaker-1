@@ -9,7 +9,10 @@
         <div class="box">
             <h2>Your PDF is ready for use!</h2>
             <p>Click download to receive your PDF or provide an email address for delivery</p>
-            <p><button type="button" class = "addButton" th:href="@{ResuMaker\resume.pdf}" onclick="openPdf(event, '/resume.pdf');">Download</button></p>
+            <form action="/download" method="GET">
+                <p><button type="submit" class = "addButton">Download</button> </p>
+            </form>
+            
             <p><input type="text" placeholder="Email" required>
             <button type="submit" class = "addButton">Send</button></p>
         </div>
@@ -21,7 +24,6 @@
                 // launch a new window with your PDF
                 window.open(path, 'resume.pdf');
             }
-        
         </script>
     </body>
 </html>
