@@ -104,10 +104,8 @@ public class PDFService {
     public PDFService() throws FileNotFoundException, DocumentException, AddressException, NoSuchProviderException {
         Document document = new Document();
         String localDir = System.getProperty("user.dir");
-        System.out.println(localDir);
-        File file = new File(localDir + "\\src\\main\\resources\\static\\resume.pdf");
+        File file = new File(localDir + "\\resume.pdf");
         PdfWriter.getInstance(document, new FileOutputStream(file));
-        System.out.println(localDir);
         document.open();
     // Setting fonts
     Font title = FontFactory.getFont(FontFactory.HELVETICA, 24, BaseColor.BLACK);
@@ -194,16 +192,5 @@ public class PDFService {
         document.close();
         EmailService email = new EmailService(document);
         // This code does not work, absolute path was used just for dev purposes. Hopefully, we get it to work soon.
-
-
-
-//        File file = new File("resume.pdf");
-//        if(file.renameTo(new File("C:\\Users\\moh55\\internship\\ResuMaker\\src\\main\\resources\\static"))) {
-//            System.out.println("File moved successful");
-//            file.delete();
-//        }
-//        else {
-//            file.renameTo(new File(("C:\\Users\\moh55\\internship\\ResuMaker\\src\\main\\resources\\static")));
-//        }
     }
 }
