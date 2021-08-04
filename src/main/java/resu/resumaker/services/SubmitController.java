@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import org.json.*;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileNotFoundException;
 import java.sql.Connection;
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 
-@Controller
+@RestController
 public class SubmitController {
     static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
     static final String USER = "program";
@@ -24,20 +25,10 @@ public class SubmitController {
     public void submit(@RequestParam String contactPOST, @RequestParam String educationPOST,
                        @RequestParam String skillPOST, @RequestParam String workPOST) throws DocumentException, FileNotFoundException {
 
-        System.out.println(contactPOST);
-        System.out.println(educationPOST);
-        System.out.println(skillPOST);
-        System.out.println(workPOST);
-
         JSONArray contact_json = new JSONArray(contactPOST);
         JSONArray education_json = new JSONArray(educationPOST);
         JSONArray skill_json = new JSONArray(skillPOST);
         JSONArray work_json = new JSONArray(workPOST);
-
-        System.out.println(contact_json.join(" "));
-        System.out.println(education_json.join(" "));
-        System.out.println(skill_json.join(" "));
-        System.out.println(work_json.join(" "));
 
         contactSubmit(contact_json);
         educationSubmit(education_json);
@@ -45,6 +36,8 @@ public class SubmitController {
         workSubmit(work_json);
 
         PDFService generate = new PDFService();
+
+        clearDB();
     }
 
     public static void contactSubmit(JSONArray contactPOST) {
@@ -85,7 +78,7 @@ public class SubmitController {
         }
     }
 
-    // 1 2 3 4
+
     public static void workSubmit(JSONArray workPOST) {
         for (int i = 0; i < workPOST.length(); i++) {
             String values = "('" + workPOST.getJSONArray(i).getString(0) + "', '" + workPOST.getJSONArray(i).getString(1) + "', '" + workPOST.getJSONArray(i).getString(2) + "', '" + workPOST.getJSONArray(i).getString(3) + "', '" + workPOST.getJSONArray(i).getString(4) + "')";
@@ -97,6 +90,17 @@ public class SubmitController {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public static void clearDB() {
+        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement stmt = conn.createStatement();
+        ) {
+            String sql = "TRUNCATE public.\"Contact\", public.\"Education\", public.\"Skills\", public.\"Work\";";
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
