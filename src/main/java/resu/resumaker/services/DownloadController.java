@@ -19,7 +19,6 @@ public class DownloadController {
 
         String localDir = System.getProperty("user.dir");
         localDir = (localDir + "\\resume.pdf");
-
         InputStreamResource resource = new InputStreamResource(new FileInputStream(localDir));
         return resource;
     }
