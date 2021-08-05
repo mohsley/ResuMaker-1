@@ -19,15 +19,6 @@
             <div class="page">
                 <h2>Education</h2>
                 <div id="dynamicEducation">
-                    <div class="dynamicBox">
-                        This is a test1
-                    </div>
-                    <div class="dynamicBox">
-                        This is a test1
-                    </div>
-                    <div class="dynamicBox">
-                        This is a test1
-                    </div>
                 </div>
                 <p><input type="text" placeholder="School Name" required id="school">
                     <input class ="tab"type="text" placeholder="Location" required id="eduLocation"></p>
@@ -39,7 +30,7 @@
 
             <div class="page">
                 <h2>Skills</h2>
-                <div id="DynamicSkills">
+                <div id="dynamicSkills">
 
                 </div>
                 <p><input type="text" placeholder="Skill Name" id = "skill">
@@ -48,7 +39,7 @@
 
             <div class="page">
                 <h2>Work Experience</h2>
-                <div id="DynamicWork">
+                <div id="dynamicWork">
 
                 </div>
                 <p><input type="text" placeholder="Company" required id = "company">
@@ -81,6 +72,7 @@
         
         function addSkill() {
             skillList.push(document.getElementById("skill").value);
+            document.getElementById("dynamicSkills").innerHTML = document.getElementById("dynamicSkills").innerHTML + "<div class=\"dynamicBox\"><p>" + document.getElementById("skill").value + "</p></div>";
             document.getElementById("skill").value = null;
         }
 
@@ -88,6 +80,8 @@
             workList.push([document.getElementById("company").value, document.getElementById("workLocation").value,
                             document.getElementById("title").value, document.getElementById("timeWorked").value,
                             document.getElementById("description").value]);
+            
+            document.getElementById("dynamicWork").innerHTML =  document.getElementById("dynamicWork").innerHTML + "<div class=\"dynamicBox\"><h3>" + document.getElementById("title").value + "</h3><p>" + document.getElementById("company").value + "</p><p>" + document.getElementById("workLocation").value + "</p><p>" + document.getElementById("timeWorked").value +  "</p><p>" + document.getElementById("description").value + "</p></div>";
             document.getElementById("company").value = null;
             document.getElementById("workLocation").value = null;
             document.getElementById("title").value = null;
@@ -99,7 +93,7 @@
             eduList.push([document.getElementById("school").value, document.getElementById("eduLocation").value,
                             document.getElementById("degree").value, document.getElementById("gpa").value,
                             document.getElementById("timeStudied").value]);
-            document.getElementsByClassName("dynamicEducation");
+            document.getElementById("dynamicEducation").innerHTML =  document.getElementById("dynamicEducation").innerHTML + "<div class=\"dynamicBox\"><h3>" + document.getElementById("school").value + "</h3><p>" + document.getElementById("eduLocation").value + "</p><p>" + document.getElementById("degree").value + ", GPA: " + document.getElementById("gpa").value +  "</p><p>" + document.getElementById("timeStudied").value + "</p></div>";
             document.getElementById("school").value = null;
             document.getElementById("eduLocation").value = null;
             document.getElementById("degree").value = null;
