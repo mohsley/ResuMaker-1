@@ -190,7 +190,6 @@ public class PDFService {
 
         document.add(miniSpacing);
         document.close();
-//        EmailService email = new EmailService(document);
         // This code does not work, absolute path was used just for dev purposes. Hopefully, we get it to work soon.
     }
 }

@@ -12,17 +12,35 @@
             <form action="/download" method="GET">
                 <p><button type="submit" class = "addButton">Download</button> </p>
             </form>
-            
-            <p><input type="text" placeholder="Email" required>
-            <button type="submit" class = "addButton">Send</button></p>
+            <form action="/email" method="POST">
+            <p><input type="text" placeholder="Email" required id="sendTo">
+            <button type="button" class = "addButton" onclick="sendEmail()">Send</button></p>
+            </form>
         </div>
         <script type="text/javascript">
-            function openPdf(e, path) {
-                // stop the browser from going to the href07
-                e = e || window.event; // for IE
-                e.preventDefault();
-                // launch a new window with your PDF
-                window.open(path, 'resume.pdf');
+        function post(path, params, method='post') {
+            const form = document.createElement('form');
+            form.method = method;
+            form.action = path;
+
+            for (const key in params) {
+                if (params.hasOwnProperty(key)) {
+                    const hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = key;
+                    hiddenField.value = params[key];
+
+                    form.appendChild(hiddenField);
+                }
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+        
+        function sendEmail(){
+            document.getElementById("sendTo").value;
+            post("/email", {sendTo:document.getElementById("sendTo").value});
             }
         </script>
     </body>
