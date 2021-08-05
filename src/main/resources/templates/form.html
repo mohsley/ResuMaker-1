@@ -18,6 +18,17 @@
 
             <div class="page">
                 <h2>Education</h2>
+                <div id="dynamicEducation">
+                    <div class="dynamicBox">
+                        This is a test1
+                    </div>
+                    <div class="dynamicBox">
+                        This is a test1
+                    </div>
+                    <div class="dynamicBox">
+                        This is a test1
+                    </div>
+                </div>
                 <p><input type="text" placeholder="School Name" required id="school">
                     <input class ="tab"type="text" placeholder="Location" required id="eduLocation"></p>
                     <p><input type="text" placeholder="Degree Type & Major/Concentration" required id = "degree">
@@ -28,12 +39,18 @@
 
             <div class="page">
                 <h2>Skills</h2>
+                <div id="DynamicSkills">
+
+                </div>
                 <p><input type="text" placeholder="Skill Name" id = "skill">
                     <button type="button" class = "addButton" id = "addSkillButton" onclick="addSkill()">Add Skill</button></p>
             </div>
 
             <div class="page">
                 <h2>Work Experience</h2>
+                <div id="DynamicWork">
+
+                </div>
                 <p><input type="text" placeholder="Company" required id = "company">
                     <input class ="tab"type="text" placeholder="Location" required id = "workLocation"></p>
                     <p><input type="text" placeholder="Title" required id = "title">
@@ -82,6 +99,7 @@
             eduList.push([document.getElementById("school").value, document.getElementById("eduLocation").value,
                             document.getElementById("degree").value, document.getElementById("gpa").value,
                             document.getElementById("timeStudied").value]);
+            document.getElementsByClassName("dynamicEducation");
             document.getElementById("school").value = null;
             document.getElementById("eduLocation").value = null;
             document.getElementById("degree").value = null;
