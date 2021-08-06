@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ResuMaker</title>
+        <link th:href = "@{/css/style.css}" rel = "stylesheet" type = "text/css" />
+        <script th:src="@{/js/main.js}" type = "text/javascript"></script>
+    </head>
+
+    <body>
+        <form id="regForm" action="/submit" method="POST">
+            <div class="page">
+                <h2>Personal Information:</h2>
+                    <p><input type="text" placeholder="First Name" required oninput="this.className = ''" id="fname"></p>
+                    <p><input type="text" placeholder="Last Name" required oninput="this.className = ''" id="lname"></p>
+                    <p><input type="email" placeholder="Email" required oninput="this.className = ''" id="email"></p>
+                    <p><input type="tel" placeholder="Phone Number" required oninput="this.className = ''" id="tel"></p>
+            </div>
+
+            <div class="page">
+                <h2>Education</h2>
+                <div id="dynamicEducation">
+                </div>
+                <p><input type="text" placeholder="School Name" required id="school">
+                    <input class ="tab"type="text" placeholder="Location" required id="eduLocation"></p>
+                    <p><input type="text" placeholder="Degree Type & Major/Concentration" required id = "degree">
+                    <input class ="tab" type="text" placeholder="GPA" required id = "gpa"></p>
+                    <p><input type="text" placeholder="Start Date - End Date" id = "timeStudied"></p>
+                    <p><button type="button" class = "addButton" id = "addEduButton" onclick = "addEdu()">Add Additional Education</button></p>
+            </div>
+
+            <div class="page">
+                <h2>Skills</h2>
+                <div id="dynamicSkills">
+
+                </div>
+                <p><input type="text" placeholder="Skill Name" id = "skill">
+                    <button type="button" class = "addButton" id = "addSkillButton" onclick="addSkill()">Add Skill</button></p>
+            </div>
+
+            <div class="page">
+                <h2>Work Experience</h2>
+                <div id="dynamicWork">
+
+                </div>
+                <p><input type="text" placeholder="Company" required id = "company">
+                    <input class ="tab"type="text" placeholder="Location" required id = "workLocation"></p>
+                    <p><input type="text" placeholder="Title" required id = "title">
+                    <input class ="tab" type="text" placeholder="Start Date-End Date" required id = "timeWorked"></p>
+                    <p><input class = "description" type="text" placeholder = "Description" id = "description"></p>
+                    <p><button type="button" class = "addButton" id = "addWorkButton" onclick="addWork()">Add Additional Experience</button></p>
+            </div>
+
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                  <button type="button" class="addButton" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                  <button type="button" class="addButton" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                </div>
+              </div>
+
+            <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
+        </form>
+
+    <script>
+        const skillList = [];
+        const workList = [];
+        const eduList = [];
+        
+        function addSkill() {
+            skillList.push(document.getElementById("skill").value);
+            document.getElementById("dynamicSkills").innerHTML = document.getElementById("dynamicSkills").innerHTML + "<div class=\"dynamicBox\"><p>" + document.getElementById("skill").value + "</p></div>";
+            document.getElementById("skill").value = null;
+        }
+
+        function addWork() {
+            workList.push([document.getElementById("company").value, document.getElementById("workLocation").value,
+                            document.getElementById("title").value, document.getElementById("timeWorked").value,
+                            document.getElementById("description").value]);
+            
+            document.getElementById("dynamicWork").innerHTML =  document.getElementById("dynamicWork").innerHTML + "<div class=\"dynamicBox\"><h3>" + document.getElementById("title").value + "</h3><p>" + document.getElementById("company").value + "</p><p>" + document.getElementById("workLocation").value + "</p><p>" + document.getElementById("timeWorked").value +  "</p><p>" + document.getElementById("description").value + "</p></div>";
+            document.getElementById("company").value = null;
+            document.getElementById("workLocation").value = null;
+            document.getElementById("title").value = null;
+            document.getElementById("timeWorked").value = null;
+            document.getElementById("description").value = null;
+        }
+
+        function addEdu() {
+            eduList.push([document.getElementById("school").value, document.getElementById("degree").value,
+                            document.getElementById("gpa").value, document.getElementById("eduLocation").value,
+                            document.getElementById("timeStudied").value]);
+            document.getElementById("dynamicEducation").innerHTML =  document.getElementById("dynamicEducation").innerHTML + "<div class=\"dynamicBox\"><h3>" + document.getElementById("school").value + "</h3><p>" + document.getElementById("eduLocation").value + "</p><p>" + document.getElementById("degree").value + ", GPA: " + document.getElementById("gpa").value +  "</p><p>" + document.getElementById("timeStudied").value + "</p></div>";
+            document.getElementById("school").value = null;
+            document.getElementById("eduLocation").value = null;
+            document.getElementById("degree").value = null;
+            document.getElementById("gpa").value = null;
+            document.getElementById("timeStudied").value = null;
+
+        }
+
+
+        var currentPage = 0;
+        showPage(currentPage);
+        
+        function showPage(n) {
+            var x = document.getElementsByClassName("page");
+            x[n].style.display = "block";
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+
+            if (n == (x.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+
+            fixStepIndicator(n);
+        }
+
+        function nextPrev(n) {
+            var x = document.getElementsByClassName("page");
+            if (n == 1 && !validateForm()) return false;
+            x[currentPage].style.display = "none";
+            currentPage = currentPage + n;
+            if (currentPage >= x.length) {
+                payload();
+                return false;
+            }
+            showPage(currentPage);
+        }
+
+        function validateForm() {
+            var x, y, i, valid = true;
+            x = document.getElementsByClassName("page");
+            y = x[currentPage].getElementsByTagName("input");
+            for (i = 0; i < y.length; i++) {
+                if (y[i].value == "") {
+                    y[i].className += " invalid";
+                    valid = false;
+                }
+            }
+            if (valid) {
+                document.getElementsByClassName("step")[currentPage].className += " finish";
+            }
+            return valid;
+        }
+
+        function fixStepIndicator(n) {
+            var i, x = document.getElementsByClassName("step");
+            for (i = 0; i < x.length; i++) {
+                x[i].className = x[i].className.replace(" active", "");
+            }
+            x[n].className += " active";
+        }
+        function payload() {
+            const contact = [document.getElementById("fname").value, document.getElementById("lname").value, 
+                             document.getElementById("email").value, document.getElementById("tel").value];
+            if (document.getElementById("skill").value != "") {
+                addSkill();
+            }
+            if (document.getElementById("company").value != "" || document.getElementById("workLocation").value != "" || document.getElementById("title").value != ""
+                || document.getElementById("timeWorked").value != "" || document.getElementById("description").value != "") {
+                addWork();
+            }
+            if (document.getElementById("school").value != "" || document.getElementById("eduLocation").value != "" || document.getElementById("degree").value != ""
+                || document.getElementById("gpa").value != "" || document.getElementById("timeStudied").value != "") {
+                addEdu();
+            }
+
+            var contact_json = JSON.stringify(contact);
+            var skill_json = JSON.stringify(skillList);
+            var work_json = JSON.stringify(workList);
+            var edu_json = JSON.stringify(eduList);
+
+            console.log(contact);
+            console.log(skillList);
+            console.log(workList);
+            console.log(eduList);
+
+            console.log(contact_json);
+            console.log(skill_json);
+            console.log(work_json);
+            console.log(edu_json);
+
+            post("/submit",{contactPOST: contact_json, educationPOST: edu_json, skillPOST: skill_json, workPOST: work_json});
+        }
+        function post(path, params, method='post') {
+            const form = document.createElement('form');
+            form.method = method;
+            form.action = path;
+
+            for (const key in params) {
+                if (params.hasOwnProperty(key)) {
+                    const hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = key;
+                    hiddenField.value = params[key];
+
+                    form.appendChild(hiddenField);
+                }
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ResuMaker</title>
+        <link th:href = "@{/css/style.css}" rel = "stylesheet" type = "text/css" />
+    </head>
+
+    <body>
+        <div class="box">
+            <h2>Your PDF is ready for use!</h2>
+            <p>Click download to receive your PDF or provide an email address for delivery</p>
+            <form action="/download" method="GET">
+                <p><button type="submit" class = "addButton">Download</button> </p>
+            </form>
+            <form action="/email" method="POST">
+            <p><input type="text" placeholder="Email" required id="sendTo">
+            <button type="button" class = "addButton" onclick="sendEmail()">Send</button></p>
+            </form>
+        </div>
+        <script type="text/javascript">
+        function post(path, params, method='post') {
+            const form = document.createElement('form');
+            form.method = method;
+            form.action = path;
+
+            for (const key in params) {
+                if (params.hasOwnProperty(key)) {
+                    const hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = key;
+                    hiddenField.value = params[key];
+
+                    form.appendChild(hiddenField);
+                }
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+        
+        function sendEmail(){
+            document.getElementById("sendTo").value;
+            post("/email", {sendTo:document.getElementById("sendTo").value});
+            }
+        </script>
+    </body>
+</html>
