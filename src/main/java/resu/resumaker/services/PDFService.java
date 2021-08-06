@@ -1,29 +1,12 @@
 package resu.resumaker.services;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-//import resu.resumaker.services.ContactRepository;
-import resu.resumaker.services.SubmitController;
 import resu.resumaker.userData.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.sql.*;
 import java.util.ArrayList;
-
-// testing imports
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
 import javax.mail.NoSuchProviderException;
 import javax.mail.internet.AddressException;
 
@@ -42,8 +25,6 @@ public class PDFService {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(CONTACT_QUERY);) {
             rs.next();
-            // Extract data from result set
-            // Retrieve by column name
             query = new ContactData(rs.getString("name"), rs.getString("email"), rs.getString("phone"));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,8 +37,6 @@ public class PDFService {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(EDUCATION_QUERY);) {
             while (rs.next()) {
-                // Extract data from result set
-                // Retrieve by column name
                 EducationData query_row = new EducationData(rs.getString("school"), rs.getString("degree"), rs.getString("gpa"), rs.getString("location"), rs.getString("dates"));
                 query.add(query_row);
             }
@@ -73,8 +52,6 @@ public class PDFService {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(WORK_QUERY);) {
             while (rs.next()) {
-                // Extract data from result set
-                // Retrieve by column name
                 WorkData query_row = new WorkData(rs.getString("title"), rs.getString("company"), rs.getString("dates"), rs.getString("location"), rs.getString("description"));
                 query.add(query_row);
             }
@@ -90,8 +67,6 @@ public class PDFService {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(SKILLS_QUERY);) {
             while (rs.next()) {
-                // Extract data from result set
-                // Retrieve by column name
                 SkillsData query_row = new SkillsData(rs.getString("skills"));
                 query.add(query_row);
             }
@@ -107,89 +82,81 @@ public class PDFService {
         File file = new File(localDir + "\\resume.pdf");
         PdfWriter.getInstance(document, new FileOutputStream(file));
         document.open();
-    // Setting fonts
-    Font title = FontFactory.getFont(FontFactory.HELVETICA, 24, BaseColor.BLACK);
-    Font subtitle = FontFactory.getFont(FontFactory.HELVETICA, 14, BaseColor.BLACK);
-    Font header = FontFactory.getFont(FontFactory.HELVETICA, 20, BaseColor.BLACK);
-    Font paragraph = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
-    Font miniSpace = FontFactory.getFont(FontFactory.HELVETICA, 6, BaseColor.BLACK);
 
-    // newLine Chunk & Paragraph
-    Chunk newLine = new Chunk("\n",paragraph);
-    Paragraph spacing = new Paragraph(newLine);
+        Font title = FontFactory.getFont(FontFactory.HELVETICA, 24, BaseColor.BLACK);
+        Font subtitle = FontFactory.getFont(FontFactory.HELVETICA, 14, BaseColor.BLACK);
+        Font header = FontFactory.getFont(FontFactory.HELVETICA, 20, BaseColor.BLACK);
+        Font paragraph = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
+        Font miniSpace = FontFactory.getFont(FontFactory.HELVETICA, 6, BaseColor.BLACK);
 
-    Chunk miniNewLine = new Chunk("\n", miniSpace);
-    Paragraph miniSpacing = new Paragraph(miniNewLine);
+        Chunk newLine = new Chunk("\n",paragraph);
+        Paragraph spacing = new Paragraph(newLine);
 
-    // Create Header
-    ContactData contact = contactDB();
+        Chunk miniNewLine = new Chunk("\n", miniSpace);
+        Paragraph miniSpacing = new Paragraph(miniNewLine);
 
-    Chunk nameData = new Chunk(contact.getName(), title);
-    Paragraph name = new Paragraph(nameData);
-        name.setAlignment(Paragraph.ALIGN_CENTER);
-        document.add(name);
+        ContactData contact = contactDB();
 
-    Chunk contactData = new Chunk(contact.getEmail() + " | " + contact.getPhone(), subtitle);
-    Paragraph contactInfo = new Paragraph(contactData);
-        contactInfo.setAlignment(Paragraph.ALIGN_CENTER);
-        document.add(contactInfo);
+        Chunk nameData = new Chunk(contact.getName(), title);
+        Paragraph name = new Paragraph(nameData);
+            name.setAlignment(Paragraph.ALIGN_CENTER);
+            document.add(name);
 
-        document.add(spacing);
+        Chunk contactData = new Chunk(contact.getEmail() + " | " + contact.getPhone(), subtitle);
+        Paragraph contactInfo = new Paragraph(contactData);
+            contactInfo.setAlignment(Paragraph.ALIGN_CENTER);
+            document.add(contactInfo);
+            document.add(spacing);
+        ArrayList<EducationData> education = educationDB();
 
-    // Create Education Block
-    ArrayList<EducationData> education = educationDB();
-
-    Chunk educationHeader = new Chunk("Education", header);
-    Paragraph eduHeader = new Paragraph(educationHeader);
-        document.add(eduHeader);
+        Chunk educationHeader = new Chunk("Education", header);
+        Paragraph eduHeader = new Paragraph(educationHeader);
+            document.add(eduHeader);
 
         for (int i = 0; i < education.size(); i++) {
-        Chunk educationData = new Chunk( education.get(i).getDegree() + " - " + education.get(i).getGpa() +
-                " GPA\n" + education.get(i).getSchool() + " - " + education.get(i).getLocation() +"\nDates Attended: " + education.get(i).getDates(), paragraph);
-        Paragraph eduData = new Paragraph(educationData);
-        document.add(eduData);
+            Chunk educationData = new Chunk( education.get(i).getDegree() + " - " + education.get(i).getGpa() +
+                    " GPA\n" + education.get(i).getSchool() + " - " + education.get(i).getLocation() +"\nDates Attended: " + education.get(i).getDates(), paragraph);
+            Paragraph eduData = new Paragraph(educationData);
+            document.add(eduData);
 
-        document.add(miniSpacing);
-    }
-        document.add(miniSpacing);
-
-    // Create Skills Block
-    ArrayList<SkillsData> skill = skillsDB();
-
-    Chunk skillsHeader = new Chunk("Skills", header);
-    Paragraph skillHead = new Paragraph(skillsHeader);
-        document.add(skillHead);
-
-    String skillsList = (String) skill.get(0).getSkills();
-        if (skill.size() > 1) {
-        for (int i = 1; i < skill.size(); i++) {
-            skillsList = skillsList + ", " + (String) skill.get(i).getSkills();
+            document.add(miniSpacing);
         }
-    }
-
-    Chunk skillDataChunk = new Chunk(skillsList, paragraph);
-    Paragraph skillDataPara = new Paragraph(skillDataChunk);
-
-        document.add(skillDataPara);
-        document.add(spacing);
-
-    // Create Work Experience Block
-    ArrayList<WorkData> work = workDB();
-
-    Chunk workHeader = new Chunk("Work Experience", header);
-    Paragraph workHead = new Paragraph(workHeader);
-        document.add(workHead);
-
-        for (int i = 0; i < work.size(); i++) {
-        Chunk workDataChunk = new Chunk(work.get(i).getTitle() + " - " + work.get(i).getDates() + "\n" + work.get(i).getCompany() + " - " + work.get(i).getLocation() + "\n" + work.get(i).getDescription(), paragraph);
-        Paragraph workDataPara = new Paragraph(workDataChunk);
-        document.add(workDataPara);
-
         document.add(miniSpacing);
-    }
 
-        document.add(miniSpacing);
-        document.close();
-        // This code does not work, absolute path was used just for dev purposes. Hopefully, we get it to work soon.
-    }
+        ArrayList<SkillsData> skill = skillsDB();
+
+        Chunk skillsHeader = new Chunk("Skills", header);
+        Paragraph skillHead = new Paragraph(skillsHeader);
+            document.add(skillHead);
+
+        String skillsList = (String) skill.get(0).getSkills();
+            if (skill.size() > 1) {
+            for (int i = 1; i < skill.size(); i++) {
+                skillsList = skillsList + ", " + (String) skill.get(i).getSkills();
+            }
+        }
+
+        Chunk skillDataChunk = new Chunk(skillsList, paragraph);
+        Paragraph skillDataPara = new Paragraph(skillDataChunk);
+
+            document.add(skillDataPara);
+            document.add(spacing);
+
+        ArrayList<WorkData> work = workDB();
+
+        Chunk workHeader = new Chunk("Work Experience", header);
+        Paragraph workHead = new Paragraph(workHeader);
+            document.add(workHead);
+
+            for (int i = 0; i < work.size(); i++) {
+            Chunk workDataChunk = new Chunk(work.get(i).getTitle() + " - " + work.get(i).getDates() + "\n" + work.get(i).getCompany() + " - " + work.get(i).getLocation() + "\n" + work.get(i).getDescription(), paragraph);
+            Paragraph workDataPara = new Paragraph(workDataChunk);
+            document.add(workDataPara);
+
+            document.add(miniSpacing);
+        }
+
+            document.add(miniSpacing);
+            document.close();
+        }
 }

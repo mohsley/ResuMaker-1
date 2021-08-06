@@ -6,10 +6,6 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import org.json.*;
-import org.springframework.web.bind.annotation.RestController;
-
 import javax.mail.NoSuchProviderException;
 import javax.mail.internet.AddressException;
 import java.io.FileNotFoundException;
@@ -17,7 +13,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 
 @Controller
 public class SubmitController {

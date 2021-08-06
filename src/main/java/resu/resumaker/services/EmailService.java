@@ -1,6 +1,4 @@
 package resu.resumaker.services;
-import com.itextpdf.text.Document;
-
 import java.io.File;
 import java.util.*;
 import javax.mail.*;
@@ -29,32 +27,27 @@ public class EmailService {
                         }
                     });
         Transport transport = session.getTransport();
-        //2) compose message
             try{
                 MimeMessage message = new MimeMessage(session);
                 message.setFrom(new InternetAddress(user));
                 message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
                 message.setSubject("Your PDF is ready for use - ResuTeam");
 
-                //3) create MimeBodyPart object and set your message text
                 BodyPart messageBodyPart1 = new MimeBodyPart();
                 messageBodyPart1.setText("Hello!\n\nYour professionally made resume is ready for use.\n\nGood luck in your job hunt,\n\nResuTeam");
 
-                //4) create new MimeBodyPart object and set DataHandler object to this object
                 MimeBodyPart messageBodyPart2 = new MimeBodyPart();
 
                 DataSource source = new FileDataSource(String.valueOf(resume));
                 messageBodyPart2.setDataHandler(new DataHandler(source));
                 messageBodyPart2.setFileName("resume.pdf");
-                //5) create Multipart object and add MimeBodyPart objects to this object
+
                 Multipart multipart = new MimeMultipart();
                 multipart.addBodyPart(messageBodyPart1);
                 multipart.addBodyPart(messageBodyPart2);
 
-                //6) set the multiplart object to the message object
                 message.setContent(multipart );
 
-                //7) send message
                 transport.connect();
                 Transport.send(message);
                 transport.close();
