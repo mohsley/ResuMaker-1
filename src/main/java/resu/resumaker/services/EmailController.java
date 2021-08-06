@@ -3,7 +3,6 @@ package resu.resumaker.services;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.mail.NoSuchProviderException;
 import javax.mail.internet.AddressException;
 import java.io.File;
