@@ -1,36 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
 body {
-    background-color: rgb(58, 58, 58);
+    background-color: rgba(0, 0, 0, 0.877);
   }
   
   h1 {
     color: rgb(255, 255, 255);
     text-align: center;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 50px;
+    margin-top: 15px;
   }
 
   h2 {
     color: rgb(0, 0, 0);
     text-align: center;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
   }
 
   h3 {
     color: rgb(0, 0, 0);
     text-align: center;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
   }
   
-  p {
-    font-family: Arial, Helvetica, sans-serif;
+  h4 {
+    color: #FFC93D;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+  h5 {
+    font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     text-align: center;
-    color:rgb(0, 0, 0);
+    color:rgb(255, 255, 255);
+    font-weight: 400;
   }
+
+  p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    color:rgb(0, 0, 0);
+    font-weight: 400;
+  }
+
+  
   input {
     padding:10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
     text-align: center;
+    color:rgb(0, 0, 0);
+    font-weight: 400;
     border-radius: 5px;
+    width: 25%;
+    min-width: 250px;
   }
 
   /* Mark input boxes that gets an error on validation: */
@@ -66,38 +99,42 @@ body {
 
   /* Mark the steps that are finished and valid: */
   .step.finish {
-    background-color: #04AA6D;
-  }
-
-  .previousNextPadding {
-    margin-left: 40px;
-    background-color: white;
-    padding:7px;
-    border-radius: 10px;
-    border-width: 3px;
-    border-color: rgb(61, 113, 255);
-  }
-
-  .previousNextColor {
-    background-color: white;
-    padding:7px;
-    border-radius: 10px;
-    border-width: 3px;
-    border-color: rgb(61, 113, 255);
+    background-color: #FFC93D;
   }
 
   .addButton {
     margin-top: 30px;
-    background-color: rgb(214, 214, 214);
-    padding:7px;
+    background-color: #FFC93D;
+    padding: 15px 32px;;
     border-radius: 10px;
-    border-width: 3px;
-    border-color: rgb(61, 113, 255);
+    border-width: 0px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    cursor: pointer;
+    color:rgb(0, 0, 0);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    color:rgb(0, 0, 0);
+    font-weight: 400;
   }
 
+  .addButton:hover {
+    background-color: #ffdb7e;
+  }
+
+
+
   .description {
-    width: 400px;
     text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color:rgb(0, 0, 0);
+    font-weight: 400;
+    width: 60%;
+    min-width: 300px;
   }
   .row {
     display: flex;
@@ -113,6 +150,7 @@ body {
     padding: 40px;
     width: 70%;
     min-width: 300px;
+    border-radius: 15px;
   }
   .box {
     background-color: #ffffff;
@@ -120,7 +158,18 @@ body {
     padding: 40px;
     width: 70%;
     min-width: 300px;
+    border-radius: 5px;
+
   }
+
+  .transparentBox {
+    background-color: none;
+    margin: 100px auto;
+    padding: 40px;
+    width: 70%;
+    min-width: 300px;
+  }
+
   .dynamicBox {
     background-color: #ffffff;
     border: 2px solid rgb(0, 0, 0); 
