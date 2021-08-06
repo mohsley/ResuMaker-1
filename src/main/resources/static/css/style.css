@@ -9,8 +9,7 @@ body {
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 50px;
-    margin-top: 15px;
+    font-size: 60px;
   }
 
   h2 {
@@ -66,17 +65,14 @@ body {
     min-width: 250px;
   }
 
-  /* Mark input boxes that gets an error on validation: */
   input.invalid {
     background-color: #ffdddd;
   }
 
-  /* Hide all steps by default: */
   .page {
     display: none;
   }
 
-  /* Make circles that indicate the steps of the form: */
   .step {
     height: 15px;
     width: 15px;
@@ -92,14 +88,13 @@ body {
     margin-left: 40px; 
   }
 
-  /* Mark the active step: */
   .step.active {
     opacity: 1;
   }
 
-  /* Mark the steps that are finished and valid: */
   .step.finish {
-    background-color: #FFC93D;
+    background-color: #ffb804;
+    opacity: 1;
   }
 
   .addButton {
@@ -124,8 +119,6 @@ body {
   .addButton:hover {
     background-color: #ffdb7e;
   }
-
-
 
   .description {
     text-align: left;
