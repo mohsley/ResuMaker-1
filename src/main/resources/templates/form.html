@@ -90,8 +90,8 @@
         }
 
         function addEdu() {
-            eduList.push([document.getElementById("school").value, document.getElementById("eduLocation").value,
-                            document.getElementById("degree").value, document.getElementById("gpa").value,
+            eduList.push([document.getElementById("school").value, document.getElementById("degree").value,
+                            document.getElementById("gpa").value, document.getElementById("eduLocation").value,
                             document.getElementById("timeStudied").value]);
             document.getElementById("dynamicEducation").innerHTML =  document.getElementById("dynamicEducation").innerHTML + "<div class=\"dynamicBox\"><h3>" + document.getElementById("school").value + "</h3><p>" + document.getElementById("eduLocation").value + "</p><p>" + document.getElementById("degree").value + ", GPA: " + document.getElementById("gpa").value +  "</p><p>" + document.getElementById("timeStudied").value + "</p></div>";
             document.getElementById("school").value = null;
