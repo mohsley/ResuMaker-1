@@ -99,7 +99,8 @@ body {
 
   /* Mark the steps that are finished and valid: */
   .step.finish {
-    background-color: #FFC93D;
+    background-color: #ffb804;
+    opacity: 1;
   }
 
   .addButton {
