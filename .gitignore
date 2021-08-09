@@ -31,3 +31,18 @@ build/
 
 ### VS Code ###
 .vscode/
+/sample.pdf
+/src/main/resources/blah.jpeg
+/src/main/resources/OIP.jfif
+/pdfBoxHelloWorld.pdf
+
+### KEVIN ###
+*.DS_Store
+# src/.DS_Store
+# src/main/.DS_Store
+# src/main/resources/.DS_Store
+/src/main/resources/static/resume.pdf
+resume.pdf
+resume.pdf
+resume.pdf
+resume.pdf

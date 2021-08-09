@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+body {
+    background-color: rgba(0, 0, 0, 0.877);
+  }
+  
+  h1 {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 60px;
+  }
+
+  h2 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+  }
+
+  h3 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+  }
+  
+  h4 {
+    color: #FFC93D;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+  h5 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    color:rgb(255, 255, 255);
+    font-weight: 400;
+  }
+
+  p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    color:rgb(0, 0, 0);
+    font-weight: 400;
+  }
+
+  
+  input {
+    padding:10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    color:rgb(0, 0, 0);
+    font-weight: 400;
+    border-radius: 5px;
+    width: 25%;
+    min-width: 250px;
+  }
+
+  input.invalid {
+    background-color: #ffdddd;
+  }
+
+  .page {
+    display: none;
+  }
+
+  .step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+  }
+
+  .tab {
+    margin-left: 40px; 
+  }
+
+  .step.active {
+    opacity: 1;
+  }
+
+  .step.finish {
+    background-color: #ffb804;
+    opacity: 1;
+  }
+
+  .addButton {
+    margin-top: 30px;
+    background-color: #FFC93D;
+    padding: 15px 32px;;
+    border-radius: 10px;
+    border-width: 0px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    cursor: pointer;
+    color:rgb(0, 0, 0);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    color:rgb(0, 0, 0);
+    font-weight: 400;
+  }
+
+  .addButton:hover {
+    background-color: #ffdb7e;
+  }
+
+  .description {
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color:rgb(0, 0, 0);
+    font-weight: 400;
+    width: 60%;
+    min-width: 300px;
+  }
+  .row {
+    display: flex;
+  }
+
+  .column {
+    flex: 50%;
+  }
+
+  #regForm {
+    background-color: #ffffff;
+    margin: 100px auto;
+    padding: 40px;
+    width: 70%;
+    min-width: 300px;
+    border-radius: 15px;
+  }
+  .box {
+    background-color: #ffffff;
+    margin: 100px auto;
+    padding: 40px;
+    width: 70%;
+    min-width: 300px;
+    border-radius: 5px;
+
+  }
+
+  .transparentBox {
+    background-color: none;
+    margin: 100px auto;
+    padding: 40px;
+    width: 70%;
+    min-width: 300px;
+  }
+
+  .dynamicBox {
+    background-color: #ffffff;
+    border: 2px solid rgb(0, 0, 0); 
+    border-radius: 5px;
+    margin: 10px auto;
+    padding: 10px;
+    width: 50%;
+    min-width: 250px;
+  }
